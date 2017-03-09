@@ -31,21 +31,22 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity STATECTRL_MAIN is
     Port ( CONF : in  STD_LOGIC;
-			  VST, VFN, PG1, PG2, PG3, PG4 : out  STD_LOGIC;
+			  VST, VFN, PG1, PG2, PG3, PG4, END_S : out  STD_LOGIC;
            SEL : out  integer);
 end STATECTRL_MAIN;
 
 architecture Behavioral of STATECTRL_MAIN is
 	component STATECTRL_COUNTER_0_5
     Port ( CONF : in  STD_LOGIC;
-			  Q : out integer);
+			  Q : out integer;
+			  TC : out STD_LOGIC := '0');
 	end component;
 
 	signal Q_T : integer;
 	signal SEL_T : integer;
 
 begin
-	STT_COUNTER : STATECTRL_COUNTER_0_5 Port map (CONF, Q_T);
+	STT_COUNTER : STATECTRL_COUNTER_0_5 Port map (CONF, Q_T, END_S);
 	
 	process (Q_T)
 		begin

@@ -31,24 +31,29 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity STATECTRL_COUNTER_0_5 is
     Port ( CONF : in  STD_LOGIC;
-			  Q : out integer);
+			  Q : out integer;
+			  TC : out STD_LOGIC := '0');
 end STATECTRL_COUNTER_0_5;
 
 architecture Behavioral of STATECTRL_COUNTER_0_5 is
 	signal Q_T : integer := 0;
+	signal TC_T : STD_LOGIC := '0';
 begin
 	process (CONF)
 		begin
 			if ( rising_edge(CONF) ) then
 				if (Q_T = 5) then
 					Q_T <= 0;
+					TC_T <= '1';
 				else
 					Q_T <= Q_T + 1;
+					TC_T <= '0';
 				end if;
 			end if;
 	end process;
 	
 	Q <= Q_T;
+	TC <= TC_T;
 
 end Behavioral;
 

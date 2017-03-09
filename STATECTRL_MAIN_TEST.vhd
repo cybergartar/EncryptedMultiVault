@@ -48,6 +48,7 @@ ARCHITECTURE behavior OF STATECTRL_MAIN_TEST IS
          PG2 : OUT  std_logic;
          PG3 : OUT  std_logic;
          PG4 : OUT  std_logic;
+			END_S : OUT std_logic;
          SEL : OUT  integer
         );
     END COMPONENT;
@@ -63,6 +64,7 @@ ARCHITECTURE behavior OF STATECTRL_MAIN_TEST IS
    signal PG2 : std_logic;
    signal PG3 : std_logic;
    signal PG4 : std_logic;
+	signal END_S : std_logic;
    signal SEL : integer;
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
@@ -80,7 +82,8 @@ BEGIN
           PG2 => PG2,
           PG3 => PG3,
           PG4 => PG4,
-          SEL => SEL
+          SEL => SEL,
+			 END_S => END_S
         );
 
    -- Clock process definitions

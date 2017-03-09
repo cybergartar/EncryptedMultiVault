@@ -42,7 +42,8 @@ ARCHITECTURE behavior OF STATECTRL_COUNTER_0_5_TEST IS
     COMPONENT STATECTRL_COUNTER_0_5
     PORT(
          CONF : IN  std_logic;
-         Q : OUT  integer
+         Q : OUT  integer;
+			TC : OUT std_logic
         );
     END COMPONENT;
     
@@ -52,6 +53,7 @@ ARCHITECTURE behavior OF STATECTRL_COUNTER_0_5_TEST IS
 
  	--Outputs
    signal Q : integer;
+	signal TC : std_logic;
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
@@ -62,7 +64,8 @@ BEGIN
 	-- Instantiate the Unit Under Test (UUT)
    uut: STATECTRL_COUNTER_0_5 PORT MAP (
           CONF => CONF,
-          Q => Q
+          Q => Q,
+			 TC => TC
         );
 
    -- Clock process definitions
