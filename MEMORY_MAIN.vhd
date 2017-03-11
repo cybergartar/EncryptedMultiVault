@@ -36,30 +36,30 @@ entity MAIN_MEMORY is
 end MAIN_MEMORY;
 
 architecture Behavioral of MAIN_MEMORY is
-	component DFF_3BIT
+	component DFF_2BIT
 		Port ( CLK : in  STD_LOGIC;
-           D : in  STD_LOGIC_VECTOR (2 downto 0);
-           Q : out  STD_LOGIC_VECTOR (2 downto 0));
+           D : in  STD_LOGIC_VECTOR (1 downto 0);
+           Q : out  STD_LOGIC_VECTOR (1 downto 0));
 	end component;
 	
-	component MEMORY_8X16
+	component MEMORY_3X16
 		Port ( D3, D2, D1, D0 : in  STD_LOGIC_VECTOR (3 downto 0);
-           ADDR : in  STD_LOGIC_VECTOR (2 downto 0);
+           ADDR : in  STD_LOGIC_VECTOR (1 downto 0);
            READ_SIG, WRITE_SIG : in  STD_LOGIC;
            Q3, Q2, Q1, Q0 : out  STD_LOGIC_VECTOR (3 downto 0));
 	end component;
 	
-	signal B_ADDR, SELECTED_ADDR : STD_LOGIC_VECTOR (2 downto 0) := "000";
+	signal B_ADDR, SELECTED_ADDR : STD_LOGIC_VECTOR (1 downto 0) := "00";
 	signal MEM_READ, MEM_WRITE : STD_LOGIC := '0';
 	
 begin
-	MAIN_MEM : MEMORY_8X16 Port map (B3, B2, B1, B0,
+	MAIN_MEM : MEMORY_3X16 Port map (B3, B2, B1, B0,
 												SELECTED_ADDR, MEM_READ, MEM_WRITE,
 												A3, A2, A1, A0);
 												
-	ADDR_LOCK : DFF_3BIT Port map (VST, B_ADDR, SELECTED_ADDR);
+	ADDR_LOCK : DFF_2BIT Port map (VST, B_ADDR, SELECTED_ADDR);
 	
-	B_ADDR <= B0(2 downto 0);
+	B_ADDR <= B0(1 downto 0);
 	MEM_READ <= VFN and (not ST);
 	MEM_WRITE <= VFN and ST;
 

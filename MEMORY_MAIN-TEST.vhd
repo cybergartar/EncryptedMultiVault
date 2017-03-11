@@ -126,7 +126,7 @@ BEGIN
 		
 		VST <= '1';
 		wait for wait_time;
-		B0 <= "0011";
+		B0 <= "0010";
 		wait for wait_time;
 		VST <= '0';
 		B3 <= "1110";

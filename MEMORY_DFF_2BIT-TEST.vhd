@@ -39,21 +39,21 @@ ARCHITECTURE behavior OF DFF_TEST IS
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT DFF_3BIT
+    COMPONENT DFF_2BIT
     PORT(
          CLK : IN  std_logic;
-         D : IN  std_logic_vector(2 downto 0);
-         Q : OUT  std_logic_vector(2 downto 0)
+         D : IN  std_logic_vector(1 downto 0);
+         Q : OUT  std_logic_vector(1 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
    signal CLK : std_logic := '0';
-   signal D : std_logic_vector(2 downto 0) := (others => '0');
+   signal D : std_logic_vector(1 downto 0) := (others => '0');
 
  	--Outputs
-   signal Q : std_logic_vector(2 downto 0);
+   signal Q : std_logic_vector(1 downto 0);
 
    -- Clock period definitions
    constant CLK_period : time := 10 ns;
@@ -61,7 +61,7 @@ ARCHITECTURE behavior OF DFF_TEST IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: DFF_3BIT PORT MAP (
+   uut: DFF_2BIT PORT MAP (
           CLK => CLK,
           D => D,
           Q => Q
@@ -71,11 +71,11 @@ BEGIN
    CLK_process :process
    begin
 		CLK <= '1';
-		D <= "110";
+		D <= "10";
 		wait for 500 ms;
 		CLK <= '0';
 		wait for 100 ms;
-		assert (Q = "110") report "FAILED" severity ERROR;
+		assert (Q = "10") report "FAILED" severity ERROR;
    end process;
  
 

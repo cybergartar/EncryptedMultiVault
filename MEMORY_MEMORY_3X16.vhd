@@ -31,16 +31,16 @@ use IEEE.NUMERIC_STD.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity MEMORY_8X16 is
+entity MEMORY_3X16 is
     Port ( D3, D2, D1, D0 : in  STD_LOGIC_VECTOR (3 downto 0);
-           ADDR : in  STD_LOGIC_VECTOR (2 downto 0);
+           ADDR : in  STD_LOGIC_VECTOR (1 downto 0);
            READ_SIG, WRITE_SIG : in  STD_LOGIC;
            Q3, Q2, Q1, Q0 : out  STD_LOGIC_VECTOR (3 downto 0));
-end MEMORY_8X16;
+end MEMORY_3X16;
 
-architecture Behavioral of MEMORY_8X16 is
-	type mem_8x16_type is array (7 downto 0) of STD_LOGIC_VECTOR (15 downto 0);
-	signal MEM : mem_8x16_type;
+architecture Behavioral of MEMORY_3X16 is
+	type mem_3x16_type is array (2 downto 0) of STD_LOGIC_VECTOR (15 downto 0);
+	signal MEM : mem_3x16_type;
 	signal MERGED_D, MERGED_Q : STD_LOGIC_VECTOR (15 downto 0) := (others => '0');
 begin
 	MERGED_D <= (D3 & D2 & D1 & D0);

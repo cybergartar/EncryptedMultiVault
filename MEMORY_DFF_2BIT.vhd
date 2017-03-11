@@ -31,14 +31,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity DFF_3BIT is
+entity DFF_2BIT is
     Port ( CLK : in  STD_LOGIC;
-           D : in  STD_LOGIC_VECTOR (2 downto 0);
-           Q : out  STD_LOGIC_VECTOR (2 downto 0));
-end DFF_3BIT;
+           D : in  STD_LOGIC_VECTOR (1 downto 0);
+           Q : out  STD_LOGIC_VECTOR (1 downto 0));
+end DFF_2BIT;
 
-architecture Behavioral of DFF_3BIT is
-	signal Q_T : STD_LOGIC_VECTOR (2 downto 0) := "000";
+architecture Behavioral of DFF_2BIT is
+	signal Q_T : STD_LOGIC_VECTOR (1 downto 0) := "00";
 begin
 	process (CLK)
 		begin

@@ -33,20 +33,20 @@ USE ieee.std_logic_unsigned.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY MEMORY_8X16_TEST IS
-END MEMORY_8X16_TEST;
+ENTITY MEMORY_3X16_TEST IS
+END MEMORY_3X16_TEST;
  
-ARCHITECTURE behavior OF MEMORY_8X16_TEST IS 
+ARCHITECTURE behavior OF MEMORY_3X16_TEST IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT MEMORY_8X16
+    COMPONENT MEMORY_3X16
     PORT(
          D3 : IN  std_logic_vector(3 downto 0);
          D2 : IN  std_logic_vector(3 downto 0);
          D1 : IN  std_logic_vector(3 downto 0);
          D0 : IN  std_logic_vector(3 downto 0);
-         ADDR : IN  std_logic_vector(2 downto 0);
+         ADDR : IN  std_logic_vector(1 downto 0);
          READ_SIG : IN  std_logic;
          WRITE_SIG : IN  std_logic;
          Q3 : OUT  std_logic_vector(3 downto 0);
@@ -62,7 +62,7 @@ ARCHITECTURE behavior OF MEMORY_8X16_TEST IS
    signal D2 : std_logic_vector(3 downto 0) := (others => '0');
    signal D1 : std_logic_vector(3 downto 0) := (others => '0');
    signal D0 : std_logic_vector(3 downto 0) := (others => '0');
-   signal ADDR : std_logic_vector(2 downto 0) := (others => '0');
+   signal ADDR : std_logic_vector(1 downto 0) := (others => '0');
    signal READ_SIG : std_logic := '0';
    signal WRITE_SIG : std_logic := '0';
 
@@ -78,7 +78,7 @@ ARCHITECTURE behavior OF MEMORY_8X16_TEST IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: MEMORY_8X16 PORT MAP (
+   uut: MEMORY_3X16 PORT MAP (
           D3 => D3,
           D2 => D2,
           D1 => D1,
@@ -103,7 +103,7 @@ BEGIN
 		D1 <= "0100";
 		D0 <= "1101";
 		wait for 100 ms;
-		ADDR <= "101";
+		ADDR <= "10";
 		wait for 100 ms;
 		WRITE_SIG <= '1';
 		wait for 100 ms;
@@ -121,7 +121,7 @@ BEGIN
 		D1 <= "1100";
 		D0 <= "1111";
 		wait for 100 ms;
-		ADDR <= "011";
+		ADDR <= "01";
 		wait for 100 ms;
 		WRITE_SIG <= '1';
 		wait for 100 ms;
