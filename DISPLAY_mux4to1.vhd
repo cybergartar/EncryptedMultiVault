@@ -39,9 +39,8 @@ entity DISPLAY_mux4to1 is
 end DISPLAY_mux4to1;
 
 architecture Behavioral of DISPLAY_mux4to1 is
-	--signal Bout_temp : std_logic_vector (3 downto 0);
+	
 begin
-	addr <= addr1&addr0;
 	
 	Bout <= B3 when addr = "11" else
 			  B2 when addr = "10" else

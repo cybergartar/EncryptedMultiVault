@@ -33,16 +33,16 @@ use IEEE.STD_LOGIC_UNSIGNED.all;
 entity DISPLAY_counter0to3 is
     Port ( CLK200Hz : in  STD_LOGIC;
 			  CLR : in STD_LOGIC;
-           Q : out STD_LOGIC_VECTOR (3 downto 0));
+           Q : out STD_LOGIC_VECTOR (1 downto 0));
 end DISPLAY_counter0to3;
 
 architecture Behavioral of DISPLAY_counter0to3 is
-	signal tmp: std_logic_vector(3 downto 0); 
+	signal tmp: std_logic_vector(1 downto 0); 
   begin  
       process (CLK200Hz, CLR) 
         begin  
           if (CLR = '1') then  
-            tmp <= "0000";  
+            tmp <= "00";  
           elsif (CLK200Hz'event and CLK200Hz = '1') then  
             tmp <= tmp + 1; 
           end if;  

@@ -19,6 +19,8 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -34,19 +36,16 @@ entity DISPLAY_main is
            LC : in  STD_LOGIC;
            ER : in  STD_LOGIC;
 			  EN : in STD_LOGIC;
+			  CLK25 : in std_logic;
 			  addr : in STD_LOGIC_VECTOR (1 downto 0);
-           Q3 : in  STD_LOGIC_VECTOR (3 downto 0);
-           Q2 : in  STD_LOGIC_VECTOR (3 downto 0);
-           Q1 : in  STD_LOGIC_VECTOR (3 downto 0);
-           Q0 : in  STD_LOGIC_VECTOR (3 downto 0);
-           CLK : in  STD_LOGIC;
-			  B3 : in STD_LOGIC ()
+			  B3,B2,B1,B0 : in STD_LOGIC_VECTOR (3 downto 0);
+			  Digit : out std_logic_vector (3 downto 0);
            Segment : out  STD_LOGIC_VECTOR (6 downto 0)); -- a -> 0, g-> 6
 end DISPLAY_main;
 
 architecture Behavioral of DISPLAY_main is
 	------ MUX4to1 -------
-	component MUX4to1
+	component DISPLAY_mux4to1
 			 Port ( B3 : in  STD_LOGIC_VECTOR (3 downto 0);
            B2 : in  STD_LOGIC_VECTOR (3 downto 0);
            B1 : in  STD_LOGIC_VECTOR (3 downto 0);
@@ -54,19 +53,34 @@ architecture Behavioral of DISPLAY_main is
            addr : in  STD_LOGIC_VECTOR (1 downto 0);
            Bout : out  STD_LOGIC_VECTOR (3 downto 0));
 	end component;
+	signal Q : std_logic_vector (3 downto 0);
 	
-	signal Q0_tmp : std_logic_vector (6 downto 0);
-	signal Q1_tmp : std_logic_vector (6 downto 0);
-	signal Q2_tmp : std_logic_vector (6 downto 0);
-	signal Q3_tmp : std_logic_vector (6 downto 0);
-
+	------ counter0to3 ------
+	component DISPLAY_counter0to3
+			 Port ( CLK200Hz : in  STD_LOGIC;
+			  CLR : in STD_LOGIC;
+           Q : out STD_LOGIC_VECTOR (1 downto 0));
+	end component;
+	signal addr_tmp : std_logic_vector (1 downto 0);
+	
+	------ dividerto200Hz ------
+	component DISPLAY_dividerto200Hz
+			 Port ( CLK25 : in  STD_LOGIC;
+           CLK200Hz : out  STD_LOGIC);
+	end component;
+	signal CLK200Hz_tmp : std_logic;
+	
+	------ decoder2to4 -------
+	component DISPLAY_decoder2to4
+			Port ( D : in  STD_LOGIC_VECTOR (1 downto 0);
+           Q : out  STD_LOGIC_VECTOR (3 downto 0));
+	end component;
 	
 begin
-	addr <= addr0&addr1;
 	
-	segment <= "0000" when EN = '0' and addr = "00" else
-				  "0000" when EN = '0' and addr = "10" else
-				  "0000" when EN = '0' and addr = "11" else
+	segment <= "0000000" when EN = '0' and addr = "00" else
+				  "0000000" when EN = '0' and addr = "10" else
+				  "0000000" when EN = '0' and addr = "11" else
 				  
 				  "1111110" when EN = '1' and OP = '1' and LC = '0' and ER = '0' and addr = "00" else
 				  "1100111" when EN = '1' and OP = '1' and LC = '0' and ER = '0' and addr = "01" else
@@ -96,7 +110,13 @@ begin
 				  
 				  
 	------- Port Map Area --------
-	withMUX : MUX4to1 port map ()
+	withMUX : DISPLAY_mux4to1 port map (B3 => B3, B2 => B2, B1 => B1, B0 => B0, Bout => Q, addr => addr_tmp);
+	
+	withdivider : DISPLAY_dividerto200Hz port map (CLK25 => CLK25, CLK200Hz => CLK200Hz_tmp);
+	
+	withcounter : DISPLAY_counter0to3 port map(CLK200Hz => CLK200Hz_tmp, CLR => '0', Q => addr_tmp);
+	
+	withdecoder : DISPLAY_decoder2to4 port map (D => addr_tmp, Q => Digit);
 		
 	 
 
