@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    21:59:52 03/09/2017 
+-- Create Date:    23:40:18 02/17/2017 
 -- Design Name: 
--- Module Name:    Decoder2to4 - Behavioral 
+-- Module Name:    D_FF - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,18 +29,23 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity DISPLAY_decoder2to4 is
-    Port ( D : in  STD_LOGIC_VECTOR (1 downto 0);
-           Q : out  STD_LOGIC_VECTOR (3 downto 0));
-end DISPLAY_decoder2to4;
+entity D_FF is
+    Port ( D,clk,CLR : in  STD_LOGIC;
+           Q : out  STD_LOGIC);
+end D_FF;
 
-architecture Behavioral of DISPLAY_decoder2to4 is
-
+architecture Behavioral of D_FF is
+   signal QT : STD_LOGIC := '0';
 begin
-	Q(0) <= not(not D(1) and not D(0)); --
-	Q(1) <= not(not D(1) and D(0)); --
-	Q(2) <= not(D(1) and not D(0));
-	Q(3) <= not(D(1) and D(0));
-
+  process(clk)
+   begin
+	   if CLR = '0'  then QT <= '0' ;
+	     elsif clk'event and clk = '0'  then
+	        
+			  QT <= D;
+	  
+	   end if;
+	end process;
+	Q <= QT;
+	 
 end Behavioral;
-

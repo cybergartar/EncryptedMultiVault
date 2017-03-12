@@ -1,0 +1,11 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7 (64-bit)
+# Build 321239 by xbuild on Fri Sep 27 19:29:51 MDT 2013
+# Start of session at: Mon Mar 13 06:37:25 2017
+# Process ID: 18464
+# Log file: C:/Users/Vincent/Documents/GitHub/EncryptedMultiVault/planAhead_run_1/planAhead.log
+# Journal file: C:/Users/Vincent/Documents/GitHub/EncryptedMultiVault/planAhead_run_1/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source C:/Users/Vincent/Documents/GitHub/EncryptedMultiVault/pa.fromHdl.tcl
+update_compile_order -fileset sim_1

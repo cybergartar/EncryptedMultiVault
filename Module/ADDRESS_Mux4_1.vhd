@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    21:59:52 03/09/2017 
+-- Create Date:    18:47:53 03/13/2017 
 -- Design Name: 
--- Module Name:    Decoder2to4 - Behavioral 
+-- Module Name:    Mux4_1 - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,18 +29,21 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity DISPLAY_decoder2to4 is
-    Port ( D : in  STD_LOGIC_VECTOR (1 downto 0);
-           Q : out  STD_LOGIC_VECTOR (3 downto 0));
-end DISPLAY_decoder2to4;
+entity Mux4_1 is
+    Port (  STA : in  STD_LOGIC_VECTOR (2 downto 0);
+				sec : in  STD_LOGIC_VECTOR (1 downto 0);
+				ST : out STD_LOGIC);
+end Mux4_1;
 
-architecture Behavioral of DISPLAY_decoder2to4 is
+architecture Behavioral of Mux4_1 is
 
 begin
-	Q(0) <= not(not D(1) and not D(0)); --
-	Q(1) <= not(not D(1) and D(0)); --
-	Q(2) <= not(D(1) and not D(0));
-	Q(3) <= not(D(1) and D(0));
+		ST <= STA(0) when sec = "00" else
+				STA(1) when sec = "01" else
+				STA(2) when sec = "10" else
+				'X';
+		
+			
 
 end Behavioral;
 
