@@ -40,6 +40,7 @@ entity DISPLAY_main is
 			  addr : in STD_LOGIC_VECTOR (1 downto 0);
 			  B3,B2,B1,B0 : in STD_LOGIC_VECTOR (3 downto 0);
 			  Digit : out std_logic_vector (3 downto 0);
+			  VFN,VST,ST,EQU : in std_logic;
            Segment : out  STD_LOGIC_VECTOR (6 downto 0)); -- a -> 0, g-> 6
 end DISPLAY_main;
 
