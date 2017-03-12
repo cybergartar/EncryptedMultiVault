@@ -36,15 +36,18 @@ entity DISPLAY_dividerto200Hz is
 end DISPLAY_dividerto200Hz;
 
 architecture Behavioral of DISPLAY_dividerto200Hz is
-	signal COUNT : std_logic := '0';
-	signal CLK_temp : std_logic;
+	signal COUNT : integer := 0;
+	signal CLK_temp : std_logic := '0';
 	
 begin
-	process(CLK)
+	process(CLK25)
 	begin
-		if CLK_temp'event and CLK_temp = '1' then
-			if COUNT >= 62499 then CLK200Hz <= not CLK200Hz; COUNT <= '0';
-			else COUNT <= COUNT + 1;
+		if CLK25'event and CLK25 = '1' then
+			if (COUNT = 62500) then
+				COUNT <= 0;
+				CLK_temp <= not CLK_temp;
+			else
+				COUNT <= COUNT + 1;
 			end if;
 		end if;
 	end process;
