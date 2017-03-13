@@ -30,45 +30,29 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity NUMBERCTRL_DUALMODE_COUNTER_WITH_CLEAR is
-    Port ( M, CLK, CLR : in  STD_LOGIC;
+entity NUMBERCTRL_N_COUNTER_WITH_CLEAR is
+	 Generic (COUNT : in integer := 3);
+    Port ( CLK, CLR : in  STD_LOGIC;
            Q : out  STD_LOGIC_VECTOR (3 downto 0));
-end NUMBERCTRL_DUALMODE_COUNTER_WITH_CLEAR;
+end NUMBERCTRL_N_COUNTER_WITH_CLEAR;
 
-architecture Behavioral of NUMBERCTRL_DUALMODE_COUNTER_WITH_CLEAR is
+architecture Behavioral of NUMBERCTRL_N_COUNTER_WITH_CLEAR is
 	signal Q_T : STD_LOGIC_VECTOR (3 downto 0) := "0000";
-	signal OLD_M : STD_LOGIC := '0';
-	signal OLD_CLK : STD_LOGIC := '0';
 begin
-	process (CLK, M, CLR)
+	process (CLK, CLR)
 		begin
 			if (CLR = '1') then
 				Q_T <= "0000";
-			end if;
-			if (M /= OLD_M) then
-				Q_T <= "0000";
-				OLD_M <= M;
+			else
+				if (rising_edge(CLK)) then
+					if (Q_T = COUNT) then
+						Q_T <= "0000";
+					else	
+						Q_T <= Q_T + 1;
+					end if;
+				end if;	
 			end if;
 			
-			if (CLK /= OLD_CLK) then
-				OLD_CLK <= CLK;
-				
-				if (CLK = '1') then
-					if (M = '0') then
-						if (Q_T = "1001") then
-							Q_T <= "0000";
-						else
-							Q_T <= Q_T + 1;
-						end if;
-					elsif (M = '1') then
-						if (Q_T = "0010") then
-							Q_T <= "0000";
-						else
-							Q_T <= Q_T + 1;
-						end if;
-					end if;
-				end if;
-			end if;
 	end process;
 	
 	Q <= Q_T;
