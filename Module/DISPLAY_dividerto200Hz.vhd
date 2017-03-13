@@ -43,7 +43,7 @@ begin
 	process(CLK25)
 	begin
 		if CLK25'event and CLK25 = '1' then
-			if (COUNT = 62500) then
+			if (COUNT = 62499) then
 				COUNT <= 0;
 				CLK_temp <= not CLK_temp;
 			else

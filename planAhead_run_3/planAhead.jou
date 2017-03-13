@@ -1,0 +1,86 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7 (64-bit)
+# Build 321239 by xbuild on Fri Sep 27 19:29:51 MDT 2013
+# Start of session at: Mon Mar 13 06:19:26 2017
+# Process ID: 21840
+# Log file: C:/Users/Vincent/Documents/GitHub/EncryptedMultiVault/planAhead_run_3/planAhead.log
+# Journal file: C:/Users/Vincent/Documents/GitHub/EncryptedMultiVault/planAhead_run_3/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source C:/Users/Vincent/Documents/GitHub/EncryptedMultiVault/pa.fromHdl.tcl
+update_compile_order -fileset sim_1
+set_property iostandard LVCMOS33 [get_ports [list {B0[3]} {B0[2]} {B0[1]} {B0[0]}]]
+set_property iostandard LVCMOS33 [get_ports [list {B1[3]} {B1[2]} {B1[1]} {B1[0]}]]
+set_property iostandard LVCMOS33 [get_ports [list {B2[3]} {B2[2]} {B2[1]} {B2[0]}]]
+set_property iostandard LVCMOS33 [get_ports [list {B3[3]} {B3[2]} {B3[1]} {B3[0]}]]
+set_property iostandard LVCMOS33 [get_ports [list {Digit[3]} {Digit[2]} {Digit[1]} {Digit[0]}]]
+set_property iostandard LVCMOS33 [get_ports [list {Segment[6]} {Segment[5]} {Segment[4]} {Segment[3]} {Segment[2]} {Segment[1]} {Segment[0]}]]
+startgroup
+set_property package_pin P20 [get_ports {B0[3]}]
+endgroup
+startgroup
+set_property package_pin P18 [get_ports {B0[2]}]
+endgroup
+startgroup
+set_property package_pin P17 [get_ports {B0[1]}]
+endgroup
+startgroup
+set_property package_pin P15 [get_ports {B0[0]}]
+endgroup
+startgroup
+set_property package_pin P5 [get_ports {Digit[3]}]
+endgroup
+startgroup
+set_property package_pin P6 [get_ports {Digit[2]}]
+endgroup
+startgroup
+set_property package_pin P131 [get_ports {Digit[1]}]
+endgroup
+startgroup
+set_property package_pin P130 [get_ports {Digit[0]}]
+endgroup
+startgroup
+set_property package_pin P135 [get_ports {Segment[6]}]
+endgroup
+startgroup
+set_property package_pin P137 [get_ports {Segment[5]}]
+endgroup
+startgroup
+set_property package_pin P140 [get_ports {Segment[4]}]
+endgroup
+startgroup
+set_property package_pin P141 [get_ports {Segment[3]}]
+endgroup
+startgroup
+set_property package_pin P1 [get_ports {Segment[2]}]
+endgroup
+startgroup
+set_property package_pin P2 [get_ports {Segment[1]}]
+endgroup
+startgroup
+set_property package_pin P4 [get_ports {Segment[0]}]
+endgroup
+startgroup
+set_property package_pin P127 [get_ports CLK25]
+endgroup
+startgroup
+set_property package_pin P21 [get_ports EQU]
+endgroup
+startgroup
+set_property package_pin P23 [get_ports ST]
+endgroup
+startgroup
+set_property package_pin P24 [get_ports VFN]
+endgroup
+set_property package_pin "" [get_ports [list  VST]]
+startgroup
+set_property package_pin P25 [get_ports VST]
+endgroup
+save_constraints
+set_property iostandard LVCMOS25 [get_ports [list CLK25]]
+set_property iostandard LVCMOS33 [get_ports [list CLK25]]
+set_property iostandard LVCMOS33 [get_ports [list EQU]]
+set_property iostandard LVCMOS33 [get_ports [list ST]]
+set_property iostandard LVCMOS33 [get_ports [list VFN]]
+set_property iostandard LVCMOS33 [get_ports [list VST]]
+save_constraints

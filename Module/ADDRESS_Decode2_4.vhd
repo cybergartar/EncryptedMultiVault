@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    21:59:52 03/09/2017 
+-- Create Date:    18:02:09 03/13/2017 
 -- Design Name: 
--- Module Name:    Decoder2to4 - Behavioral 
+-- Module Name:    Decode2_4 - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,18 +29,21 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity DISPLAY_decoder2to4 is
+entity Decode2_4 is
     Port ( D : in  STD_LOGIC_VECTOR (1 downto 0);
-           Q : out  STD_LOGIC_VECTOR (3 downto 0));
-end DISPLAY_decoder2to4;
+           Q : OUT  STD_LOGIC_VECTOR (3 downto 0));
+end Decode2_4;
 
-architecture Behavioral of DISPLAY_decoder2to4 is
+architecture Behavioral of Decode2_4 is
 
 begin
-	Q(0) <= not(not D(1) and not D(0)); --
-	Q(1) <= not(not D(1) and D(0)); --
-	Q(2) <= not(D(1) and not D(0));
-	Q(3) <= not(D(1) and D(0));
+
+	Q <=  "1000" when  D="11" else -- 3
+			"0100" when  D="10" else -- 2
+			"0010" when  D="01" else -- 1
+			"0001" when	 D="00" else -- 0
+			"0000";
+
 
 end Behavioral;
 
